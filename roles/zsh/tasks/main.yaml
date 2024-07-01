@@ -1,0 +1,32 @@
+---
+- name: Install zsh
+  apt:
+    name: zsh
+    state: present
+  become: true
+  tags:
+    - zsh
+    - ubuntu
+    - docker-env
+
+- name: Set zsh as the default shell.
+  become: true
+  user:
+    name: "{{ user }}"
+    shell: /bin/zsh
+  tags:
+    - zsh
+    - ubuntu
+    - docker-env
+
+- name: Run Zsh to initialize plugins (Changes will not be detected by Ansible.)
+  shell: /bin/zsh -i -c "source {{ lookup('env', 'HOME') }}/.zshenv"
+  become_user: "{{ user }}"
+  become: true
+  args:
+    executable: /bin/zsh
+  changed_when: false
+  tags:
+    - zsh
+    - ubuntu
+    - docker-env

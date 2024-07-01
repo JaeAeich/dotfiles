@@ -1,0 +1,17 @@
+---
+neovim_git_repo: https://github.com/neovim/neovim.git
+
+neovim_version: stable
+
+neovim_prerequisite_packages:
+  - cmake
+  - ninja-build
+  - gettext
+  - cmake
+  - unzip
+  - curl
+  - build-essential
+  - ripgrep
+  - fzf
+
+neovim_temp_dir: /tmp/vim
