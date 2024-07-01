@@ -1,0 +1,12 @@
+---
+deps_list:
+  - fzf
+  - curl
+  - git
+  - btop
+  - autojump
+  - xclip
+  - tmux
+  - tldr
+  - ripgrep
+  - shutter

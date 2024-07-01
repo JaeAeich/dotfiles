@@ -1,0 +1,20 @@
+---
+- name: Git clone dotfiles
+  git:
+    repo: "{{ dotfiles_git_repo }}"
+    version: "{{ dotfiles_git_version }}"
+    dest: "{{ dotfiles_temp_dest }}"
+  become: true
+
+- name: Install stow
+  apt:
+    name: stow
+    state: present
+  become: true
+
+- name: Stow dotfiles
+  shell: stow -t {{ lookup('env', 'HOME') }} .
+  args:
+    chdir: "{{ dotfiles_temp_dest }}"
+    executable: /bin/bash
+  changed_when: false

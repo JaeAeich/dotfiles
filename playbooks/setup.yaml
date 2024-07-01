@@ -5,8 +5,10 @@
   vars:
     user: "{{ lookup('env', 'USER') }}"
   roles:
+    - role: dotfiles
     - role: zsh
     - role: neovim
     - role: ssh
     - role: asdf
+    - role: deps
     - role: alacritty

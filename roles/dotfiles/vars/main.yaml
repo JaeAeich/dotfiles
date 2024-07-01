@@ -1,0 +1,6 @@
+---
+dotfiles_git_repo: https://github.com/jaeaeich/.dotfiles.git
+
+dotfiles_git_version: main
+
+dotfiles_temp_dest: /tmp/dotfiles
