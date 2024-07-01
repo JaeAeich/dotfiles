@@ -1,0 +1,43 @@
+---
+- name: Ensure the .ssh directory exists
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.ssh"
+    state: directory
+    mode: "0700"
+  tags:
+    - ssh
+    - ubuntu
+    - personal
+
+- name: Copy the public SSH key
+  copy:
+    content: "{{ ssh_public_key }}"
+    dest: "{{ ssh_key_destination }}"
+    mode: "0600"
+  tags:
+    - ssh
+    - ubuntu
+    - personal
+
+- name: Copy the private SSH key
+  copy:
+    content: "{{ ssh_private_key }}"
+    dest: "{{ ssh_key_destination }}"
+    mode: "0600"
+  tags:
+    - ssh
+    - ubuntu
+    - personal
+
+- name: Ensure ssh-agent is running and add the private key
+  shell: |
+    eval "$(ssh-agent -s)"
+    ssh-add "{{ ssh_key_destination }}"
+  args:
+    executable: /bin/bash
+  changed_when: false
+  tags:
+    - ssh
+    - ubuntu
+    - personal
+...
