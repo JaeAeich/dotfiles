@@ -7,3 +7,5 @@
   roles:
     - role: zsh
     - role: neovim
+    - role: ssh
+    - role: asdf
