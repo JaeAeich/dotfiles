@@ -9,3 +9,4 @@
     - role: neovim
     - role: ssh
     - role: asdf
+    - role: alacritty

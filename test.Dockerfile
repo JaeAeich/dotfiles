@@ -15,3 +15,8 @@ FROM base AS final
 COPY . /root
 WORKDIR /root
 ENV USER root
+RUN apt install -y locales && \
+    locale-gen en_US.UTF-8 && \
+    dpkg-reconfigure locales && \
+    apt-get clean autoclean && \
+    apt-get autoremove --yes
