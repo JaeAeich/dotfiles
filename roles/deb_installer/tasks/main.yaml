@@ -1,0 +1,25 @@
+---
+- name: Download deb package
+  get_url:
+    url: '{{ package_url }}'
+    dest: /tmp/{{ package_name }}.deb
+    owner: '{{ user }}'
+    group: '{{ user }}'
+    mode: 0755
+
+- name: Get the name of the package
+  shell: "dpkg-deb -I package.deb | grep -Po '(?<=^ Package: ).*'"
+  register: package_name
+  args:
+    chdir: /tmp
+
+- name: Remove any previous versions of the package
+  become: true
+  apt:
+    name: '{{ package_name.stdout }}'
+    state: absent
+
+- name: Install the package
+  become: true
+  apt:
+    deb: /tmp/{{ package_name }}.deb
